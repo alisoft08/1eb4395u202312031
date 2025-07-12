@@ -12,4 +12,20 @@ public class ThingStateRepository(AppDbContext context) : BaseRepository<ThingSt
     {
         return await Context.Set<ThingState>().AnyAsync(thingState => thingState.ThingSerialNumber.Identifier == thingSerialNumber && thingState.CollectedAt == collectedAt);
     }
+
+    public async Task<int> FindLastOperationMode()
+    {
+        // var maxDate = await Context.Set<ThingState>().MaxAsync(ts => ts.CollectedAt);
+        //
+        // return await Context.Set<ThingState>()
+        //     .Where(ts => ts.CollectedAt == maxDate)
+        //     .Select(ts => ts.CurrentOperationMode)
+        //     .FirstOrDefaultAsync();
+        
+        return await Context.Set<ThingState>()
+            .OrderByDescending(ts => ts.CollectedAt)
+            .Select(ts => ts.CurrentOperationMode)
+            .FirstOrDefaultAsync();
+        
+    }
 }

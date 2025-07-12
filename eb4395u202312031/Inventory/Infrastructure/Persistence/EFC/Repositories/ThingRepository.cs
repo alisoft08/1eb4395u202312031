@@ -12,6 +12,6 @@ public class ThingRepository(AppDbContext context) : BaseRepository<Thing>(conte
 {
     public async Task<Thing?> FindThingBySerialNumberAsync(Guid serialNumber)
     {
-        return Context.Set<Thing>().FirstOrDefault(sn => sn.SerialNumber.Identifier == serialNumber);
+        return await Context.Set<Thing>().FirstOrDefaultAsync(sn => sn.SerialNumber.Identifier == serialNumber);
     }
 }

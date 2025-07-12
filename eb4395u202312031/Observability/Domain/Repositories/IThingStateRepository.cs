@@ -6,6 +6,8 @@ namespace eb4395u202312031.Observability.Domain.Repositories;
 public interface IThingStateRepository : IBaseRepository<ThingState>
 {
     Task<bool> ExistsByThingSerialNumberAndCollectedAt(Guid thingSerialNumber, DateTime collectedAt);
-    
-    
+
+    Task<int> FindLastOperationMode();
+
+
 }

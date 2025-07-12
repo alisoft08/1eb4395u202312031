@@ -3,7 +3,7 @@ using eb4395u202312031.Observability.Domain.Model.ValueObjects;
 
 namespace eb4395u202312031.Observability.Domain.Model.Aggregates;
 
-public class ThingState
+public partial class ThingState
 {
     public int Id { get; }
     

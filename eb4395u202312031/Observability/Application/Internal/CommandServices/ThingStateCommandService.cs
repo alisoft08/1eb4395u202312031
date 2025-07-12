@@ -11,11 +11,8 @@ public class ThingStateCommandService(IThingStateRepository repository, IUnitOfW
     public async Task<ThingState?> Handle(CreateThingStateCommand command)
     {
         
-        // var thing = await thingFacadeRepository.FetchThingBySerialNumberAsync(command.ThingSerialNumber.Identifier);
-        // if(thing == 0) 
-        // {
-        //     throw new Exception($"Thing with serial number {command.ThingSerialNumber} not found.");
-        // }
+
+        var lastOpMode = await repository.FindLastOperationMode();
         if (await repository.ExistsByThingSerialNumberAndCollectedAt(command.ThingSerialNumber.Identifier,
                 command.CollectedAt))
         {

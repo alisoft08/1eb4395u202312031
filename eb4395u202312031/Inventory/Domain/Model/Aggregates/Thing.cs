@@ -3,7 +3,7 @@ using eb4395u202312031.Inventory.Domain.Model.ValueObjects;
 
 namespace eb4395u202312031.Inventory.Domain.Model.Aggregates;
 
-public class Thing
+public partial class Thing
 {
     public int Id { get; }
     public SerialNumber SerialNumber { get; private set; } = new();
@@ -40,6 +40,11 @@ public class Thing
         }
         
         MiniumHumidityThreshold = command.miniumHumidityThreshold;
+    }
+
+    public void UpdateOperationMode(int operationMode)
+    {
+        OperationMode = (EOperationMode)operationMode;
     }
 }
     

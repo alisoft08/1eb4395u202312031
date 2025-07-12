@@ -9,10 +9,13 @@ using eb4395u202312031.Inventory.Domain.Repositories;
 using eb4395u202312031.Inventory.Domain.Services;
 using eb4395u202312031.Inventory.Infrastructure.Persistence.EFC.Repositories;
 using eb4395u202312031.Inventory.Interfaces.ACL;
+using eb4395u202312031.Observability.Application.ACL;
 using eb4395u202312031.Observability.Application.Internal.CommandServices;
+using eb4395u202312031.Observability.Application.Internal.QueryServices;
 using eb4395u202312031.Observability.Domain.Repositories;
 using eb4395u202312031.Observability.Domain.Services;
 using eb4395u202312031.Observability.Infrastructure.Persistence.EFC.Repositories;
+using eb4395u202312031.Observability.Interfaces.ACL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
@@ -53,9 +56,21 @@ builder.Services.AddSwaggerGen(options =>
     options.SwaggerDoc("v1",
         new OpenApiInfo
         {
-            Title = "eb4395u202312031.API",
+            Title = "EasyIrriot.API",
             Version = "v1",
-            Description = "Irriot Platform API",
+            Description = "EasyIrriot Platform API",
+            TermsOfService = new Uri("https://www.irriot.com/"),
+            Contact = new OpenApiContact
+            {
+                Name = "u202312031 - Alison Arrieta",
+                Email = "u202312031@upc.edu.pe"
+                
+            },
+            License = new OpenApiLicense
+            {
+                Name = "Apache 2.0",
+                Url = new Uri("https://www.apache.org/licenses/LICENSE-2.0.html")
+            }
             
         });
 });
@@ -69,6 +84,8 @@ builder.Services.AddScoped<IThingsContextFacade, ThingsContextFacade>();
 
 builder.Services.AddScoped<IThingStateRepository, ThingStateRepository>();
 builder.Services.AddScoped<IThingStateCommandService, ThingStateCommandService>();
+builder.Services.AddScoped<IThingStateQueryService, ThingStateQueryService>();
+builder.Services.AddScoped<IThingStatesContextFacade, ThingStatesContextFacade>();
 
 
 
