@@ -8,6 +8,12 @@ using Swashbuckle.AspNetCore.Annotations;
 
 namespace eb4395u202312031.Inventory.Interfaces.REST;
 
+/// <summary>
+/// Exposes RESTful endpoints to create and retrieve Thing entities from the system.
+/// </summary>
+/// <remarks>
+/// Alison Jimena Arrieta Quispe
+/// </remarks>
 [ApiController]
 [Route("api/v1/[controller]")]
 [Produces(MediaTypeNames.Application.Json)]
@@ -15,6 +21,13 @@ namespace eb4395u202312031.Inventory.Interfaces.REST;
 public class ThingsController(IThingCommandService thingCommandService, IThingQueryService thingQueryService)
     : ControllerBase
 {
+    /// <summary>
+    /// Retrieves all Thing entities available in the system.
+    /// </summary>
+    /// <returns>An HTTP 201 response with a list of Thing resources if found; otherwise, 400.</returns>
+    /// <remarks>
+    /// Alison Jimena Arrieta Quispe
+    /// </remarks>
     [HttpGet]
     [SwaggerOperation("Get All Things", "Get all things", OperationId = "GetAllThings")]
     [SwaggerResponse(201, "The things were found and returned", typeof(IEnumerable<ThingResource>))]
@@ -25,9 +38,18 @@ public class ThingsController(IThingCommandService thingCommandService, IThingQu
         var things = await thingQueryService.Handle(getAllThings);
         var thingsResources = things.Select(ThingResourceFromEntityAssembler.ToResourceFromEntity);
         return StatusCode(201, thingsResources);
-
     }
-    
+
+    /// <summary>
+    /// Creates a new Thing entity based on the provided resource data.
+    /// </summary>
+    /// <param name="resource">The resource containing the information required to create a Thing.</param>
+    /// <returns>
+    /// An HTTP 201 response with the created Thing resource if successful; otherwise, 400.
+    /// </returns>
+    /// <remarks>
+    /// Alison Jimena Arrieta Quispe
+    /// </remarks>
     [HttpPost]
     [SwaggerOperation("Create Thing", "Create a new thing.", OperationId = "CreateThing")]
     [SwaggerResponse(201, "The thing was created.", typeof(ThingResource))]
@@ -40,5 +62,4 @@ public class ThingsController(IThingCommandService thingCommandService, IThingQu
         var thingResource = ThingResourceFromEntityAssembler.ToResourceFromEntity(thing);
         return StatusCode(201, thingResource);    
     }
-    
 }

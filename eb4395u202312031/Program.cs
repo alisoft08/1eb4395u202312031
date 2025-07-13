@@ -87,11 +87,7 @@ builder.Services.AddScoped<IThingStateCommandService, ThingStateCommandService>(
 builder.Services.AddScoped<IThingStateQueryService, ThingStateQueryService>();
 builder.Services.AddScoped<IThingStatesContextFacade, ThingStatesContextFacade>();
 
-
-
-
 var app = builder.Build();
-
 
 // Verify if the database exists and create it if it doesn't
 using (var scope = app.Services.CreateScope())
